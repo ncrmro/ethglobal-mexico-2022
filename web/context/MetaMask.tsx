@@ -16,7 +16,7 @@ export interface Web3 {
 
 export const MetaMask = () => {
   const { account, setWeb3 } = useContext(Web3Context);
-  console.log(account);
+
   async function enableEth() {
     const ethereum = window.ethereum;
     try {
