@@ -7,8 +7,8 @@ import { NavBar } from "../components/Navbar";
 
 const Layout: React.FC<{ children: ReactNode }> = (props) => (
   <div className={styles.container}>
-    <NavBar></NavBar>
-    {props.children}
+    <NavBar />
+    <div className={styles.main}>{props.children}</div>
   </div>
 );
 
