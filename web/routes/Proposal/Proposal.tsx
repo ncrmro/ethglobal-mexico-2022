@@ -8,8 +8,15 @@ const Comments: React.FC<{ comments: typeof proposal["comments"] }> = (
   <div className={styles.comments}>
     {props.comments.map((comment) => (
       <div key={comment.id}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          Test Username <div>12T</div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            paddingBottom: "0.25em",
+          }}
+        >
+          {comment.user.username}
+          <div>12T</div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>{comment.message}</div>
