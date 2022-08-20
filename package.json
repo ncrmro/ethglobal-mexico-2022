@@ -5,5 +5,8 @@
   "workspaces": [
     "contracts",
     "web"
-  ]
+  ],
+  "scripts": {
+    "web": "yarn workspace web"
+  }
 }
