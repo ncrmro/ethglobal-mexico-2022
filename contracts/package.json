@@ -1,0 +1,7 @@
+{
+  "name": "contacts",
+  "version": "0.0.1",
+  "dependencies": {
+    "hardhat": "^2.10.2"
+  }
+}
