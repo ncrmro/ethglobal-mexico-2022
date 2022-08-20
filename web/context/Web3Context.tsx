@@ -5,20 +5,24 @@ declare let window: any;
 
 export const Web3Context = createContext<Web3>(null!);
 
+const isClient =
+  typeof window !== "undefined" && typeof window.etherum !== "undefined";
 export const Web3Provider: React.FC<any> = ({ children }) => {
   // import  'contract' in this line
   const [{ provider, account }, setWeb3] = useState<Web3>({} as Web3);
 
   // Listens for network changes to reload the page
   useEffect(() => {
-    window.ethereum.on("chainChanged", (chainId: string) =>
-      window.location.reload()
-    );
-    return () => {
-      window.ethereum.removeListener("chainChanged", (chainId: string) =>
+    if (isClient) {
+      window.ethereum.on("chainChanged", (chainId: string) =>
         window.location.reload()
       );
-    };
+      return () => {
+        window.ethereum.removeListener("chainChanged", (chainId: string) =>
+          window.location.reload()
+        );
+      };
+    }
   }, []);
 
   // Listens for a change in account and updates state
@@ -33,10 +37,13 @@ export const Web3Provider: React.FC<any> = ({ children }) => {
       }));
     }
 
-    window.ethereum.on("accountsChanged", newAccount);
-    return () => {
-      window.ethereum.removeListener("accountsChanged", newAccount);
-    };
+    if (isClient) {
+      window.ethereum.on("accountsChanged", newAccount);
+      return () => {
+        window.ethereum.removeListener("accountsChanged", newAccount);
+      };
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account]);
 
