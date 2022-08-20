@@ -45,7 +45,9 @@ export function useViewerObservable(): Viewer | undefined {
   }, [isClient]);
 
   useEffect(() => {
-    const account = "";
+    const account = window.localStorage.getItem("WalletAddress")
+      ? window.localStorage.getItem("WalletAddress")
+      : null;
     if (viewer === undefined) {
       fetchSyncedUser(account).then((viewer) => viewer && setViewer(viewer));
     }
