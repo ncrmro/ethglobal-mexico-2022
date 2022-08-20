@@ -28,7 +28,6 @@ const Home: NextPage = () => {
           <select
             name="state"
             id="state"
-            // @ts-ignore
             onChange={(event) => setState(event.target.value)}
           >
             {proposalState.map((state) => (
