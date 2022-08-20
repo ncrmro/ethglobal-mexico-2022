@@ -1,5 +1,5 @@
 import type { Web3 } from "./MetaMask";
-import { createContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 declare let window: any;
 
@@ -60,3 +60,5 @@ export const Web3Provider: React.FC<any> = ({ children }) => {
     </Web3Context.Provider>
   );
 };
+
+export const useWeb3 = () => useContext(Web3Context);
