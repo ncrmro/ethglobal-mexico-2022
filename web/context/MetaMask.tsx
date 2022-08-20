@@ -52,6 +52,8 @@ export const MetaMask = () => {
         const signer = provider.getSigner(address);
         const account = signer._address;
         window.localStorage.setItem("WalletAddress", account);
+        window.dispatchEvent(new Event("storage")); // <-----
+
         // TODO ADD specific contract
         //const contract =
 

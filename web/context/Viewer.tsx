@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useWeb3 } from "./Web3Context";
 
 interface Viewer {
   username: string;
@@ -29,26 +28,24 @@ const isClient =
  * uses
  */
 export function useViewerObservable(): Viewer | undefined {
-  const [viewer, setViewer] = useState();
-  // console.log("VIEWER OBSR", isClient && window.ethereum);
-
-  useEffect(() => {
-    if (isClient) {
-      console.log("LOG", window.ethereum);
-      window.ethereum.on("accountsChanged", () => {
-        console.log("Ayee");
-      });
-      return () => {
-        window.ethereum.removeListener("accountsChanged", () => {});
-      };
-    }
-  }, [isClient]);
-
-  useEffect(() => {
-    const account = window.localStorage.getItem("WalletAddress")
+  // On client get the users wallet address from local storage if it exists
+  const [account, setAccount] = useState(
+    typeof window !== "undefined"
       ? window.localStorage.getItem("WalletAddress")
-      : null;
-    if (viewer === undefined) {
+      : undefined
+  );
+  const [viewer, setViewer] = useState();
+
+  // Listen for local storage events
+  if (typeof window !== "undefined") {
+    window.onstorage = () => {
+      const address = window.localStorage.getItem("WalletAddress");
+      if (address) setAccount(address);
+    };
+  }
+
+  useEffect(() => {
+    if (viewer === undefined && account) {
       fetchSyncedUser(account).then((viewer) => viewer && setViewer(viewer));
     }
   }, [viewer]);
