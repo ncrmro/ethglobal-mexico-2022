@@ -1,0 +1,8 @@
+{
+  "name": "eth-mex",
+  "license": "UNLICENSED",
+  "private": true,
+  "workspaces": [
+    "web"
+  ]
+}
