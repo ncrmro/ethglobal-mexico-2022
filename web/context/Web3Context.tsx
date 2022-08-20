@@ -10,7 +10,7 @@ const isClient =
 export const Web3Provider: React.FC<any> = ({ children }) => {
   // import  'contract' in this line
   const [{ provider, account }, setWeb3] = useState<Web3>({} as Web3);
-
+  console.log("CONTEXTUALPROVIDER", provider);
   // Listens for network changes to reload the page
   useEffect(() => {
     if (isClient) {
@@ -29,7 +29,7 @@ export const Web3Provider: React.FC<any> = ({ children }) => {
   useEffect(() => {
     function newAccount(accounts: Array<string>) {
       const signer = provider?.getSigner(accounts[0]);
-
+      console.log("signer : ", signer);
       setWeb3((prev: Web3) => ({
         ...prev,
         //contract: contract.connect(signer),
