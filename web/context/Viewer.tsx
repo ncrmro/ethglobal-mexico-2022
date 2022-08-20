@@ -44,6 +44,13 @@ export function useViewerObservable(): Viewer | undefined {
     }
   }, [isClient]);
 
+  useEffect(() => {
+    const account = "";
+    if (viewer === undefined) {
+      fetchSyncedUser(account).then((viewer) => viewer && setViewer(viewer));
+    }
+  }, [viewer]);
+
   return viewer;
 }
 
