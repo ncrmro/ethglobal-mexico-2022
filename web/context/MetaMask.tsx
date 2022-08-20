@@ -3,6 +3,7 @@ import { Web3Context } from "./Web3Context";
 import { Web3Provider } from "@ethersproject/providers";
 // Todo: import Contract
 import { toast } from "react-toastify";
+import { ethers } from "ethers";
 
 declare let window: any;
 
@@ -20,7 +21,7 @@ export const MetaMask = () => {
     const ethereum = window.ethereum;
     try {
       if (ethereum) {
-        const provider = new Web3Provider(ethereum);
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
         const [address] = await ethereum.request({
           method: "eth_requestAccounts",
         });
@@ -71,22 +72,20 @@ export const MetaMask = () => {
   }
 
   return (
-    <div className="py-3">
+    <div>
       {!account ? (
         <button className="metamask-btn" onClick={enableEth}>
           Connect Wallet
         </button>
       ) : (
         <button
-          className="blue-btn"
           onClick={() =>
             toast.info(`Your wallet address is: ${account}`, {
               autoClose: 3000,
               position: "top-center",
               style: {
-                width: 520,
+                width: 120,
               },
-              theme: "colored",
             })
           }
         >
