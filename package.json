@@ -8,5 +8,9 @@
   ],
   "scripts": {
     "web": "yarn workspace web"
+  },
+  "dependencies": {
+    "@walletconnect/web3-provider": "^1.8.0",
+    "web3modal": "^1.9.8"
   }
 }
