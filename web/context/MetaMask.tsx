@@ -16,7 +16,7 @@ export interface Web3 {
 
 export const MetaMask = () => {
   const { account, setWeb3 } = useContext(Web3Context);
-  console.log(account);
+
   async function enableEth() {
     const ethereum = window.ethereum;
     try {
@@ -51,6 +51,9 @@ export const MetaMask = () => {
 
         const signer = provider.getSigner(address);
         const account = signer._address;
+        window.localStorage.setItem("WalletAddress", account);
+        window.dispatchEvent(new Event("storage")); // <-----
+
         // TODO ADD specific contract
         //const contract =
 

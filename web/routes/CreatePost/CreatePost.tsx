@@ -5,7 +5,7 @@ export const CreateProposalForm = () => {
   const viewer = useViewer();
   const [title, setTitle] = useState();
   const [body, setBody] = useState();
-  console.log(viewer);
+  console.log("VIEWER", viewer);
 
   return (
     <div
