@@ -7,6 +7,7 @@ import {
 } from "../routes/Proposal";
 import Link from "next/link";
 
+// TODO filter by the viewers doas
 /**
  * Show all the user's threads
  * @constructor
@@ -27,7 +28,7 @@ const Home: NextPage = () => {
           <select
             name="state"
             id="state"
-            onSelect={(event) => setState(event.target.value)}
+            onChange={(event) => setState(event.target.value)}
           >
             {proposalState.map((state) => (
               <option key={state} value={state}>
@@ -40,7 +41,7 @@ const Home: NextPage = () => {
       </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div style={{ float: "left" }}>Proposal</div>
-        <div style={{ display: "flex", flexDirection: "column", gap: ".2em" }}>
+        <div style={{ display: "flex", gap: ".4rem" }}>
           <div>Replies</div>
           <div>Views</div>
           <div>Activity</div>
