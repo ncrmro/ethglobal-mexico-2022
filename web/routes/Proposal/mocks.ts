@@ -1,4 +1,25 @@
-import { mockUsers } from "../../utils/useWalletViewer";
+// enum ProposalState {
+//   Pending,
+//   Active,
+//   Canceled,
+//   Defeated,
+//   Succeeded,
+//   Queued,
+//   Expired,
+//   Executed
+// }
+
+export const mockUsers = {
+  address1: {
+    username: "Dr Who",
+  },
+  address2: {
+    username: "Batman",
+  },
+  address3: {
+    username: "Iron Man",
+  },
+};
 
 export const proposalState = [
   "Draft",
