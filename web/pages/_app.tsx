@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 import styles from "../styles/Home.module.css";
 import { Web3Provider } from "../context/Web3Context";
 import { NavBar } from "../components/Navbar";
+import { useViewerObservable, ViewerContext } from "../context/Viewer";
 
 const Layout: React.FC<{ children: ReactNode }> = (props) => (
   <div className={styles.container}>
@@ -13,11 +14,14 @@ const Layout: React.FC<{ children: ReactNode }> = (props) => (
 );
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const viewer = useViewerObservable();
   return (
     <Web3Provider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ViewerContext.Provider value={viewer}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ViewerContext.Provider>
     </Web3Provider>
   );
 }

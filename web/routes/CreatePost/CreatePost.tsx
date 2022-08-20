@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useViewer } from "../../context/Viewer";
 
 export const CreateProposalForm = () => {
+  const viewer = useViewer();
   const [title, setTitle] = useState();
   const [body, setBody] = useState();
+  console.log(viewer);
+
   return (
     <div
       style={{
