@@ -36,7 +36,7 @@ const Home: NextPage = () => {
                 {state}
               </option>
             ))}
-            <option value={undefined}>All</option>
+            <option value="All">All</option>
           </select>
         </div>
       </div>
@@ -52,7 +52,7 @@ const Home: NextPage = () => {
         <div key={proposal.id}>
           <Link href={`/proposals/${proposal.id}`}>{proposal.title}</Link>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <div>State: Pased</div>
+            <div>State: {proposal.state}</div>
             <div style={{ display: "flex", gap: ".1em" }}>
               <div>1</div>
               <div>2</div>
