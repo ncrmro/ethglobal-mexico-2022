@@ -11,6 +11,9 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const client = await getRedisClient();
-  await client.set("hello", JSON.stringify({ hello: "world" }));
+  const results = await client.get("hello");
+
+  console.log("RESULTS", results);
+
   res.status(200).json({ name: "John Doe" });
 }
