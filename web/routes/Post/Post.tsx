@@ -42,33 +42,45 @@ export const Post = ({ post }: { post: PostApiRes }) => {
     <div className={styles.container}>
       <div className={styles.header}>
         <div>{post.title}</div>
-        <div>
-          <a
-            href={`https://app.uniswap.org/#/vote/2/${post.proposal.id}}?chain=mainnet`}
+        {post.proposal.id ? (
+          <div>
+            <a
+              href={`https://app.uniswap.org/#/vote/2/${post.proposal.id}?chain=mainnet`}
+            >
+              Proposal Link
+            </a>
+          </div>
+        ) : (
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: "1em",
+            }}
           >
-            Proposal Link
-          </a>
-        </div>
-        <input
-          type="number"
-          placeholder="Add Proposal ID"
-          value={proposalId}
-          onChange={(e) => setProposalId(e.target.value)}
-        />
-        <button
-          onClick={async () => {
-            const state = await queryProposalState(proposalId);
-            const { ...p } = post;
-            await updatePost({
-              ...p,
-              authorAddress: viewer?.address!,
-              proposalId,
-              state,
-            });
-          }}
-        >
-          Submit
-        </button>
+            <input
+              type="number"
+              placeholder="Add Proposal ID"
+              value={proposalId}
+              onChange={(e) => setProposalId(e.target.value)}
+            />
+            <button
+              onClick={async () => {
+                const state = await queryProposalState(proposalId);
+                const { ...p } = post;
+                await updatePost({
+                  ...p,
+                  authorAddress: viewer?.address!,
+                  proposalId,
+                  state,
+                });
+              }}
+            >
+              Submit
+            </button>
+          </div>
+        )}
 
         <MakeBoardroomLink {...post.author} />
         {/*<Link href={`/users/${post?.author.address}`}>*/}
