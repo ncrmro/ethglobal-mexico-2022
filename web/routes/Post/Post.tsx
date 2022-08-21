@@ -38,14 +38,14 @@ export const Post = ({ post }: { post: PostApiRes }) => {
         <input
           placeholder="Add Proposal ID"
           value={text}
-          // @ts-ignore
-          onSubmit={(e) => setText(e.target.value)}
+          onChange={(e) => setText(e.target.value)}
         />
         <button onClick={() => queryProposalState(text)}>Submit</button>
 
         <MakeBoardroomLink {...post.author} />
         <div>State: {post.state}</div>
       </div>
+      <hr />
       <Comments comments={post.comments} />
     </div>
   );
