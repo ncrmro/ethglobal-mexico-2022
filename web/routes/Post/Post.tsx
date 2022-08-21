@@ -49,7 +49,8 @@ export const Post = (props: { post: PostApiRes }) => {
             <a
               target="_blank"
               rel="noreferrer"
-              href={`https://app.uniswap.org/#/vote/2/${post.proposal.id}?chain=mainnet`}
+              // href={`https://app.uniswap.org/#/vote/2/${post.proposal.id}?chain=mainnet`}
+              href="https://app.uniswap.org/#/vote/2/22?chain=mainnet"
             >
               Proposal Link
             </a>
