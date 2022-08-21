@@ -34,7 +34,13 @@ export const Post = ({ post }: { post: PostApiRes }) => {
     <div className={styles.container}>
       <div className={styles.header}>
         <div>{post.title}</div>
-        <div>{post.proposal.title}</div>
+        <div>
+          <a
+            href={`https://app.uniswap.org/#/vote/2/$${post.proposal.id}}?chain=mainnet`}
+          >
+            Proposal Link
+          </a>
+        </div>
         <input
           placeholder="Add Proposal ID"
           value={text}
@@ -45,7 +51,11 @@ export const Post = ({ post }: { post: PostApiRes }) => {
         <MakeBoardroomLink {...post.author} />
         <div>State: {post.state}</div>
       </div>
-      <hr />
+      <div style={{ display: "flex" }}>
+        <hr />
+        Comments
+        <hr />
+      </div>
       <Comments comments={post.comments} />
     </div>
   );
