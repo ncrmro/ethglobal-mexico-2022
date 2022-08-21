@@ -27,6 +27,7 @@ export const NavBar = () => {
             flexWrap: "nowrap",
             justifyContent: "space-between",
             gap: "3.5rem",
+            listStyle: "none",
           }}
         >
           <li className={path === "/" ? "active-nav" : "nav-item"}>
