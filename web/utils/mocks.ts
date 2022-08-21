@@ -61,6 +61,7 @@ export interface Post {
   id: string;
   authorAddress: string;
   doaId: string;
+  proposalId: string;
   title: string;
   state: ProposalState;
   comments: CommentType[];

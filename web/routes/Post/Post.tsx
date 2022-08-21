@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Proposal.module.css";
+import styles from "./Post.module.css";
 import fetchPost, { PostApiRes } from "./fetchPost";
 
 const Comments: React.FC<{ comments: PostApiRes["comments"] }> = (props) => (
@@ -30,7 +30,9 @@ export const Post = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div>Proposal: {post.title}</div>
+        <div>{post.title}</div>
+        <div>{post.proposal.title}</div>
+        <div>{post.author.username}</div>
         <div>State: {post.state}</div>
       </div>
       <Comments comments={post.comments} />

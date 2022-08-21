@@ -1,3 +1,1 @@
-import { Proposal } from "../../routes/Proposal";
-
-export default Proposal;
+export { Post as default } from "../../routes/Post";
