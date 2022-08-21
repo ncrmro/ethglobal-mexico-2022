@@ -66,7 +66,7 @@ export interface Post {
   comments: CommentType[];
 }
 
-interface DAO {
+export interface DAO {
   id: string;
   title: string;
   contractAddress: string;
