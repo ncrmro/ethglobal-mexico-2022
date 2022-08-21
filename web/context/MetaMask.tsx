@@ -2,9 +2,10 @@ import { useContext, Dispatch, SetStateAction } from "react";
 import { Web3Context } from "./Web3Context";
 import { Web3Provider } from "@ethersproject/providers";
 // Todo: import Contract
-import { toast } from "react-toastify";
 import { ethers } from "ethers";
 import { useViewer } from "../context/Viewer";
+import { Provider } from "web3modal";
+import { verifyUserApi } from "./../routes/Users/verifyUserApi";
 
 declare let window: any;
 
@@ -51,6 +52,95 @@ export const MetaMask = () => {
             contractAddress = "";
         }
 
+        const getWorldCoinVerified = async () => {
+          // const web3 = new ethers.providers.Web3Provider(window.ethereum)
+          const contract = new ethers.Contract(
+            "0x8f9b3a2eb1dfa6d90dee7c6373f9c0088feeebab",
+            [
+              {
+                inputs: [
+                  {
+                    internalType: "contract IWorldID",
+                    name: "_worldId",
+                    type: "address",
+                  },
+                  {
+                    internalType: "uint256",
+                    name: "_groupId",
+                    type: "uint256",
+                  },
+                  { internalType: "string", name: "_actionId", type: "string" },
+                ],
+                stateMutability: "payable",
+                type: "constructor",
+              },
+              {
+                anonymous: false,
+                inputs: [
+                  {
+                    indexed: true,
+                    internalType: "uint256",
+                    name: "profileId",
+                    type: "uint256",
+                  },
+                ],
+                name: "ProfileUnverified",
+                type: "event",
+              },
+              {
+                anonymous: false,
+                inputs: [
+                  {
+                    indexed: true,
+                    internalType: "uint256",
+                    name: "profileId",
+                    type: "uint256",
+                  },
+                ],
+                name: "ProfileVerified",
+                type: "event",
+              },
+              {
+                inputs: [
+                  { internalType: "uint256", name: "", type: "uint256" },
+                ],
+                name: "isVerified",
+                outputs: [{ internalType: "bool", name: "", type: "bool" }],
+                stateMutability: "view",
+                type: "function",
+              },
+              {
+                inputs: [
+                  {
+                    internalType: "uint256",
+                    name: "profileId",
+                    type: "uint256",
+                  },
+                  { internalType: "uint256", name: "root", type: "uint256" },
+                  {
+                    internalType: "uint256",
+                    name: "nullifierHash",
+                    type: "uint256",
+                  },
+                  {
+                    internalType: "uint256[8]",
+                    name: "proof",
+                    type: "uint256[8]",
+                  },
+                ],
+                name: "verify",
+                outputs: [],
+                stateMutability: "payable",
+                type: "function",
+              },
+            ],
+            provider
+          );
+          const lensID = "0xf5";
+          const res = await contract.isVerified(lensID);
+          res ? await verifyUserApi(viewer) : null;
+        };
+        getWorldCoinVerified();
         const signer = provider.getSigner(address);
         const account = signer._address;
         window.localStorage.setItem("WalletAddress", account);

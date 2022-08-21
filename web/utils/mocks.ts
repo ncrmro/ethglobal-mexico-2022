@@ -13,6 +13,9 @@ export interface User {
   address: string;
   username: string;
   daos: Record<string, { tokenCount: number; votingPower: number }>;
+  lens_profile: string;
+  lens_id: string;
+  worldcoin_verified: boolean;
 }
 
 const testDAO: User["daos"][string] = { tokenCount: 12, votingPower: 1 };
@@ -24,6 +27,9 @@ export const accounts: User[] = [
     daos: {
       testDAO,
     },
+    lens_profile: "",
+    lens_id: "",
+    worldcoin_verified: false,
   },
   {
     address: "0x33A5529AF61C24B832C9C82C4f443862380063b7",
@@ -31,6 +37,9 @@ export const accounts: User[] = [
     daos: {
       testDAO,
     },
+    lens_profile: "",
+    lens_id: "",
+    worldcoin_verified: false,
   },
   {
     address: "0x77EC061aC11df6b42Af3784BCE835A5feAF247Dd",
@@ -38,6 +47,9 @@ export const accounts: User[] = [
     daos: {
       testDAO,
     },
+    lens_profile: "",
+    lens_id: "",
+    worldcoin_verified: false,
   },
 ];
 
