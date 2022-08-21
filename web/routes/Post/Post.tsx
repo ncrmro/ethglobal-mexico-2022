@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Post.module.css";
 import fetchPost, { PostApiRes } from "./fetchPost";
+import MakeBoardroomLink from "../../components/makeBoardroomLink";
 
 const Comments: React.FC<{ comments: PostApiRes["comments"] }> = (props) => (
   <div className={styles.comments}>
@@ -13,7 +14,7 @@ const Comments: React.FC<{ comments: PostApiRes["comments"] }> = (props) => (
             paddingBottom: "0.25em",
           }}
         >
-          {comment.author.username}
+          <MakeBoardroomLink {...comment.author} />
           <div>{comment.author.daos["testDAO"].tokenCount}T</div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -32,7 +33,7 @@ export const Post = () => {
       <div className={styles.header}>
         <div>{post.title}</div>
         <div>{post.proposal.title}</div>
-        <div>{post.author.username}</div>
+        <MakeBoardroomLink {...post.author} />
         <div>State: {post.state}</div>
       </div>
       <Comments comments={post.comments} />
