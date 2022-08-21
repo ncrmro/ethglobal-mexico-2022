@@ -9,26 +9,12 @@ interface Config {
 
 const isClient = typeof window !== "undefined";
 
-/**
- * Because E2E tests are running on the same built client that
- * is deployed, we need to dynamically change the GraphQL
- * client URL.
- */
-function getGraphQLURI() {
-  if (isClient) {
-    const isLocalhostClient = window.location.href.includes("localhost");
-    if (isLocalhostClient) {
-      return publicRuntimeConfig.GRAPHQL_URL;
-    }
-    return "/graphql";
-  }
-  return serverRuntimeConfig.GRAPHQL_URL;
-}
-
 const config: Config = {
   production: false,
   isClient,
-  graphqlUri: getGraphQLURI(),
+  graphqlUri: publicRuntimeConfig.GRAPHQL_URL,
 };
+
+console.log("config", config);
 
 export default config;

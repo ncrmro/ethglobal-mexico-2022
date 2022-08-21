@@ -33,7 +33,7 @@ export function useViewerObservable(): Viewer | undefined {
       : undefined
   );
   const [viewer, setViewer] = useState();
-  console.log("ACC", account);
+
   // Listen for local storage events
   if (typeof window !== "undefined") {
     window.onstorage = () => {
@@ -47,7 +47,6 @@ export function useViewerObservable(): Viewer | undefined {
       fetchSyncedUser(account).then((viewer) => viewer && setViewer(viewer));
     }
   }, [viewer]);
-  isClientReady && console.log(window.ethereum);
   if (!isClientReady) return;
   return viewer;
 }

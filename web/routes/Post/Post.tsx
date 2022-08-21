@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Post.module.css";
-import fetchPost, { PostApiRes } from "./fetchPost";
+import { PostApiRes } from "./fetchPost";
 import MakeBoardroomLink from "../../components/makeBoardroomLink";
-import { queryProposalState }from "./update-proposal-status";
 
 const Comments: React.FC<{ comments: PostApiRes["comments"] }> = (props) => (
   <div className={styles.comments}>
@@ -27,15 +26,22 @@ const Comments: React.FC<{ comments: PostApiRes["comments"] }> = (props) => (
   </div>
 );
 
-export const Post = () => {
-  const [text,setText] = useState("");
-  const post = fetchPost();
+export const Post = ({ post }: { post: PostApiRes }) => {
+  const [text, setText] = useState("");
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div>{post.title}</div>
-        <div>{post.proposalId}</div>
-        <input type="number" placeholder="Add Proposal ID" /><input type="button" value="Submit" onSubmit={queryProposalState("23")}/>
+        <div>{post.proposal.title}</div>
+        <input type="number" placeholder="Add Proposal ID" />
+        <input
+          type="button"
+          value={text}
+          // @ts-ignore
+          onSubmit={(e) => setText(e.target.value)}
+        />
+
         <MakeBoardroomLink {...post.author} />
         <div>State: {post.state}</div>
       </div>

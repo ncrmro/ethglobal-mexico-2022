@@ -22,7 +22,7 @@ function createApolloClient() {
     link: ApolloLink.from([
       new BatchHttpLink({
         uri: config.graphqlUri,
-        credentials: "include",
+        // credentials: "include",
       }),
     ]),
     cache,
@@ -53,6 +53,19 @@ export function initializeApollo(initialState?: any): Client {
 
 export function useApollo(initialState: unknown): Client {
   return useMemo(() => initializeApollo(initialState), [initialState]);
+}
+
+export function fetchGraphQL(query: string, variables: Record<string, any>) {
+  return fetch(config.graphqlUri, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query,
+      variables,
+    }),
+  });
 }
 
 export { apolloClient };
