@@ -9,22 +9,37 @@ export const NavBar = () => {
 
   return (
     <>
-      <ToastContainer />
-      <header
-        className="flex justify-around items-center py-3
-				border-b-2 border-gray-100 dark:border-gray-700"
+      <nav
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          paddingBottom: "0.25em",
+          gap: "5rem",
+          alignItems: "center",
+          paddingInline: "3rem",
+        }}
       >
-        <nav>
-          <ul className="flex justify-around text-center">
-            <li className={path === "/" ? "active-nav" : "nav-item"}>
-              <Link href="/">Home</Link>
-            </li>
-          </ul>
-        </nav>
+        <ul
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            justifyContent: "space-between",
+            gap: "3.5rem",
+          }}
+        >
+          <li className={path === "/" ? "active-nav" : "nav-item"}>
+            <Link href="/">Home</Link>
+          </li>
+          <li>
+            <Link href="/proposals/create">Proposals</Link>
+          </li>
+        </ul>
         <div className="flex items-center">
           <MetaMask />
         </div>
-      </header>
+      </nav>
     </>
   );
 };

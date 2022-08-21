@@ -4,6 +4,7 @@ import { Web3Provider } from "@ethersproject/providers";
 // Todo: import Contract
 import { toast } from "react-toastify";
 import { ethers } from "ethers";
+import { useViewer } from "../context/Viewer";
 
 declare let window: any;
 
@@ -15,6 +16,7 @@ export interface Web3 {
 }
 
 export const MetaMask = () => {
+  const viewer = useViewer();
   const { account, setWeb3 } = useContext(Web3Context);
 
   async function enableEth() {
@@ -81,19 +83,9 @@ export const MetaMask = () => {
           Connect Wallet
         </button>
       ) : (
-        <button
-          onClick={() =>
-            toast.info(`Your wallet address is: ${account}`, {
-              autoClose: 3000,
-              position: "top-center",
-              style: {
-                width: 120,
-              },
-            })
-          }
-        >
-          Wallet Connected
-        </button>
+        <p style={{ whiteSpace: "nowrap" }}>
+          Hello <b>{viewer?.username ? viewer.username : viewer?.address}</b>
+        </p>
       )}
     </div>
   );
