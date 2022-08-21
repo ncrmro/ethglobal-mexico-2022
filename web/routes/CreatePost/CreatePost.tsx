@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { useViewer } from "../../context/Viewer";
+import { createPostAPI, Post } from "./createPostAPI";
 
 export const CreateProposalForm = () => {
   const viewer = useViewer();
-  const [title, setTitle] = useState();
-  const [body, setBody] = useState();
-  console.log("VIEWER", viewer);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  if (!viewer?.account) {
+    return (
+      <div>
+        Please connect you're wallet before attempting to create a new post
+      </div>
+    );
+  }
 
   return (
     <div
@@ -25,20 +33,22 @@ export const CreateProposalForm = () => {
           width: "100%",
           gap: "1em",
         }}
+        onSubmit={async (e) => {
+          e.preventDefault();
+          await createPostAPI({ userAddress: viewer.account, title, content });
+        }}
       >
         <label htmlFor="title">Title</label>
         <input
           id="title"
           value={title}
-          // @ts-ignore
-          onChange={(event) => setTitle(event.type.value)}
+          onChange={(event) => setTitle(event.target.value)}
         />
         <label htmlFor="content">Content</label>
         <textarea
           id="content"
-          value={body}
-          // @ts-ignore
-          onChange={(event) => setBody(event.type.value)}
+          value={content}
+          onChange={(event) => setContent(event.target.value)}
         />
       </form>
       <button type="submit" form="create-post" style={{ float: "right" }}>
