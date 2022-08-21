@@ -1,2 +1,2 @@
 export * from "./Proposal";
-export * from "./mocks";
+export * from "../../utils/mocks";

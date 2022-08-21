@@ -9,32 +9,37 @@
 //   Executed
 // }
 
-export const accounts = [
+export interface User {
+  address: string;
+  username: string;
+  daos: Record<string, { tokenCount: number; votingPower: number }>;
+}
+
+const testDAO: User["daos"][string] = { tokenCount: 12, votingPower: 1 };
+
+export const accounts: User[] = [
   {
     address: "0x4269f41Fa8440CdbD1A919eEd9414bF96BDFB5eE",
     username: "juanforthemoney",
+    daos: {
+      testDAO,
+    },
   },
   {
     address: "0x33A5529AF61C24B832C9C82C4f443862380063b7",
     username: "ncrmro",
+    daos: {
+      testDAO,
+    },
   },
   {
     address: "0x25A5629AF61C24B832C9C82C4f443862380063b7",
     username: "devin_mathew",
+    daos: {
+      testDAO,
+    },
   },
 ];
-
-export const mockUsers = {
-  address1: {
-    username: "Dr Who",
-  },
-  address2: {
-    username: "Batman",
-  },
-  address3: {
-    username: "Iron Man",
-  },
-};
 
 export const proposalState = [
   "Draft",
@@ -45,20 +50,20 @@ export const proposalState = [
 
 export type ProposalState = typeof proposalState[number];
 
-interface Comment {
+export interface CommentType {
   id: string;
-  authorAddress: string;
+  author: User;
   message: string;
   sentiment: "agree" | "disagree" | "numeral";
-  votingPower: number;
 }
 
 interface Post {
   id: string;
   authorAddress: string;
+  doaId: string;
   title: string;
   state: ProposalState;
-  comments: Comment[];
+  comments: CommentType[];
 }
 
 interface DAO {
@@ -69,34 +74,36 @@ interface DAO {
   description: String;
 }
 
-interface Proposal {
+export interface Proposal {
   id: string;
+  authorAddress: string;
   contractAddress: string;
+  title: string;
   status: string;
   postID: string;
 }
 
+export const comments: CommentType[] = [
+  {
+    id: "1",
+    author: accounts[2],
+    message: "Why South Dakota, is this a joke?",
+    sentiment: "agree",
+  },
+  {
+    id: "2",
+    author: accounts[1],
+    message: "I've drafted a new proposal",
+    sentiment: "disagree",
+  },
+];
 export const post: Post = {
   id: "1",
+  doaId: "",
   title: "Should the next ETH Global be hosted in South Dakota",
   state: "Draft",
   authorAddress: accounts[0].address,
-  comments: [
-    {
-      id: "1",
-      authorAddress: accounts[2].address,
-      message: "Why South Dakota, is this a joke?",
-      sentiment: "agree",
-      votingPower: 1,
-    },
-    {
-      id: "2",
-      authorAddress: accounts[1].address,
-      message: "I've drafted a new proposal",
-      sentiment: "disagree",
-      votingPower: 7,
-    },
-  ],
+  comments,
 };
 
 export const posts: Post[] = [
@@ -132,6 +139,8 @@ export const daos: DAO[] = [
 
 export const proposal: Proposal = {
   id: "1",
+  title: "Cool thing",
+  authorAddress: accounts[1].address,
   contractAddress: "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
   status: "ACTIVE",
   postID: "1",
