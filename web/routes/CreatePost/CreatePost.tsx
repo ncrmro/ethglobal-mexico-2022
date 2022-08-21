@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useViewer } from "../../context/Viewer";
 import { createPostAPI, Post } from "./createPostAPI";
+import { useWeb3 } from "../../context/Web3Context";
 
 export const CreatePostForm = () => {
   const viewer = useViewer();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
-  if (!viewer?.address) {
+  const contextualUser = useWeb3().account;
+  if (!viewer?.address || !contextualUser) {
     return (
       <div>
         Please connect your wallet before attempting to create a new post
