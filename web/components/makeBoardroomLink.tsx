@@ -24,7 +24,11 @@ const MakeBoardroomLink = (props: User) => {
   }, []);
 
   return (
-    <a href={`https://boardroom.io/voter/${address}`} target="_blank">
+    <a
+      href={`https://boardroom.io/voter/${address}`}
+      target="_blank"
+      rel="noreferrer"
+    >
       {username} {isVerified && <>🌎🪙</>}
     </a>
   );
