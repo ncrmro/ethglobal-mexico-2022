@@ -1,4 +1,4 @@
-import { useContext, Dispatch, SetStateAction } from "react";
+import { useContext, Dispatch, SetStateAction, useEffect } from "react";
 import { Web3Context } from "./Web3Context";
 import { Web3Provider } from "@ethersproject/providers";
 // Todo: import Contract
@@ -19,6 +19,27 @@ export interface Web3 {
 export const MetaMask = () => {
   const viewer = useViewer();
   const { account, setWeb3 } = useContext(Web3Context);
+
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      window.localStorage.getItem("WalletAddress")
+    ) {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner(
+        window.localStorage.getItem("WalletAddress")
+      );
+      const account = signer._address;
+
+      setWeb3 &&
+        setWeb3((prev: Web3) => ({
+          ...prev,
+          // contract,
+          provider,
+          account,
+        }));
+    }
+  }, []);
 
   async function enableEth() {
     const ethereum = window.ethereum;
@@ -136,11 +157,12 @@ export const MetaMask = () => {
             ],
             provider
           );
-          const lensID = "0xf5";
+          //TODO: update this to the
+          const lensID = viewer?.lens_id || "0xf5";
           const res = await contract.isVerified(lensID);
           res ? await verifyUserApi(viewer) : null;
         };
-        getWorldCoinVerified();
+        !viewer?.worldcoin_verified && getWorldCoinVerified();
         const signer = provider.getSigner(address);
         const account = signer._address;
         window.localStorage.setItem("WalletAddress", account);
