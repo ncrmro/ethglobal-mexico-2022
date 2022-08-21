@@ -19,9 +19,10 @@ const Comments: React.FC<{ comments: PostApiRes["comments"] }> = (props) => {
               paddingBottom: "0.25em",
             }}
           >
-            <Link href={`/users/${viewer?.address}`}>
-              {comment.author.username}
-            </Link>
+            <MakeBoardroomLink {...viewer!} />
+            {/*<Link href={`/users/${viewer?.address}`}>*/}
+            {/*  {comment.author.username}*/}
+            {/*</Link>*/}
             <div>{comment.author.daos["testDAO"].tokenCount}T</div>
           </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
