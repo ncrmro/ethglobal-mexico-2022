@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { proposalState, ProposalState } from "../../utils/mocks";
 import useFetchProposals from "./useFetchProposals";
+import { useViewer } from "../../context/Viewer";
 
 // TODO filter by the viewers doas
 /**
@@ -10,15 +11,21 @@ import useFetchProposals from "./useFetchProposals";
  * @constructor
  */
 export const ProposalsRoute: NextPage = () => {
+  const viewer = useViewer();
   const [selectedState, setState] = useState<ProposalState | "All">("All");
   const { proposals } = useFetchProposals({
     state: selectedState,
   });
+  const doasCount = viewer?.daos ? Object.keys(viewer.daos).length : 0;
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <h1>Proposals</h1>
+        <div>
+          <h1 style={{ margin: 0, marginBottom: "0.3em" }}>Proposals</h1>
+          {doasCount > 0 && `${doasCount} DOA`}
+        </div>
+
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <label htmlFor="state">State:</label>
           <select

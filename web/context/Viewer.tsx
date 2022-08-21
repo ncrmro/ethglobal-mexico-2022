@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { User } from "../utils/mocks";
 
-interface Viewer {
-  username: string;
-  account: string;
-}
+type Viewer = User;
 
 async function fetchSyncedUser(account: string) {
   if (typeof window !== "undefined") {
@@ -36,6 +34,7 @@ export function useViewerObservable(): Viewer | undefined {
   );
   const [viewer, setViewer] = useState();
 
+  console.log("ACC", account);
   // Listen for local storage events
   if (typeof window !== "undefined") {
     window.onstorage = () => {
