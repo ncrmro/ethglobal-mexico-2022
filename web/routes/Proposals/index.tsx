@@ -20,14 +20,22 @@ export const ProposalsRoute: NextPage = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
           <h1 style={{ margin: 0, marginBottom: "0.3em" }}>Proposals</h1>
           {doasCount > 0 && `${doasCount} DOA`}
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <label htmlFor="state">State:</label>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+          }}
+        >
+          <label htmlFor="state" style={{ textAlign: "right" }}>
+            State
+          </label>
           <select
             name="state"
             id="state"
@@ -45,24 +53,23 @@ export const ProposalsRoute: NextPage = () => {
       </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div style={{ float: "left" }}>Proposal</div>
-        <div style={{ display: "flex", gap: ".4rem" }}>
+        <div style={{ display: "flex", gap: ".2rem" }}>
           <div>Replies</div>
           <div>Views</div>
           <div>Activity</div>
+          <div>State</div>
         </div>
       </div>
       {proposals.map((proposal) => (
-        <div key={proposal.id}>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Link href={`/posts/${proposal.id}`}>{proposal.title}</Link>
-            <div>{proposal.author.username}</div>
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <div>State: {proposal.status}</div>
-            <div style={{ display: "flex", gap: ".1em" }}>
-              <div>1</div>
+        <div key={proposal.id} style={{ display: "flex" }}>
+          <Link href={`/posts/${proposal.id}`}>{proposal.title}</Link>
+          <div>
+            <div style={{ textAlign: "right" }}>{proposal.doaId}</div>
+            <div style={{ display: "flex", gap: ".2em" }}>
+              <div>4</div>
               <div>2</div>
               <div>3</div>
+              <div>{proposal.status}</div>
             </div>
           </div>
         </div>
