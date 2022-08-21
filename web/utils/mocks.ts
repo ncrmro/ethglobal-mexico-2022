@@ -57,7 +57,7 @@ export interface CommentType {
   sentiment: "agree" | "disagree" | "numeral";
 }
 
-interface Post {
+export interface Post {
   id: string;
   authorAddress: string;
   doaId: string;
