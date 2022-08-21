@@ -2,8 +2,9 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 0.5em;
+    padding: 1em 0.5em;
     align-items: center;
+    gap: 1em;
 }
 
 .main {

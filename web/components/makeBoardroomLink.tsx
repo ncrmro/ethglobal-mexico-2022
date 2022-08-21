@@ -5,9 +5,7 @@ const MakeBoardroomLink = (props: User) => {
   const { address, username } = props;
   return (
     <Link passHref={true} href={`https://boardroom.io/voter/${address}`}>
-      <a target="_blank">
-        <button> {username}</button>
-      </a>
+      <a target="_blank">{username}</a>
     </Link>
   );
 };
