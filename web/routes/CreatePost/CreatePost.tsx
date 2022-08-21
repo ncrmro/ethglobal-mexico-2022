@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useViewer } from "../../context/Viewer";
 import { createPostAPI, Post } from "./createPostAPI";
 
-export const CreateProposalForm = () => {
+export const CreatePostForm = () => {
   const viewer = useViewer();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");

@@ -1,1 +1,1 @@
-export { CreateProposalForm as default } from "../../routes/CreatePost";
+export { CreatePostForm as default } from "../../routes/CreatePost";
