@@ -4,7 +4,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   publicRuntimeConfig: {
-    GRAPHQL_URL: "https://api-mumbai.lens.dev/",
+    GRAPHQL_URL: "https://api.lens.dev",
   },
 };
 
