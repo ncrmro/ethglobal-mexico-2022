@@ -5,6 +5,7 @@ import styles from "../styles/Home.module.css";
 import { Web3Provider } from "../context/Web3Context";
 import { NavBar } from "../components/Navbar";
 import { useViewerObservable, ViewerContext } from "../context/Viewer";
+import { ApolloProvider, useApollo } from "../utils/apollo";
 
 const Layout: React.FC<{ children: ReactNode }> = (props) => (
   <div className={styles.container}>
@@ -14,14 +15,17 @@ const Layout: React.FC<{ children: ReactNode }> = (props) => (
 );
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const apolloClient = useApollo(undefined);
   const viewer = useViewerObservable();
   return (
     <Web3Provider>
-      <ViewerContext.Provider value={viewer}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ViewerContext.Provider>
+      <ApolloProvider client={apolloClient}>
+        <ViewerContext.Provider value={viewer}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ViewerContext.Provider>
+      </ApolloProvider>
     </Web3Provider>
   );
 }
