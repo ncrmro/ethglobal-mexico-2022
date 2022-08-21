@@ -1,41 +1,25 @@
 import React from "react";
-import styles from "./Proposal.module.css";
-import fetchProposal, { ProposalApiRes } from "./fetchProposals";
+import fetchPosts from "./fetchPosts";
+import Link from "next/link";
 
-const Comments: React.FC<{ comments: ProposalApiRes["comments"] }> = (
-  props
-) => (
-  <div className={styles.comments}>
-    {props.comments.map((comment) => (
-      <div key={comment.id}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            paddingBottom: "0.25em",
-          }}
-        >
-          {comment.author.username}
-          <div>{comment.author.daos["testDAO"].tokenCount}T</div>
-        </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>{comment.message}</div>
-          <div>{comment.author.daos["testDAO"].votingPower}P</div>
-        </div>
-      </div>
-    ))}
-  </div>
-);
-
-export const Proposal = () => {
-  const post = fetchProposal();
+export const PostsRoute = () => {
+  const { posts } = fetchPosts();
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <div>Proposal: {post.title}</div>
-        <div>State: {post.status}</div>
-      </div>
-      <Comments comments={post.comments} />
+    <div>
+      {posts.map((posts) => (
+        <div key={posts.id} style={{ display: "flex" }}>
+          <Link href={`/posts/${posts.id}`}>{posts.title}</Link>
+          <div>
+            <div style={{ textAlign: "right" }}>{posts.doaId}</div>
+            <div style={{ display: "flex", gap: ".2em" }}>
+              <div>4</div>
+              <div>2</div>
+              <div>3</div>
+              <div>{posts.state}</div>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
