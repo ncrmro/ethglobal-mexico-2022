@@ -61,6 +61,21 @@ interface Post {
   comments: Comment[];
 }
 
+interface DAO {
+  id: string;
+  title: string;
+  contractAddress: string;
+  tokenAddress: string;
+  description: String;
+}
+
+interface Proposal {
+  id: string;
+  contractAddress: string;
+  status: string;
+  posts: Post[];
+}
+
 export const post: Post = {
   id: "1",
   title: "Should the next ETH Global be hosted in South Dakota",
@@ -93,3 +108,12 @@ export const posts: Post[] = [
     state: "Published",
   },
 ];
+
+export const dao: DAO = {
+  id: "UNI",
+  title: "UNISWAP",
+  contractAddress: "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+  tokenAddress: "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
+  description:
+    "The Uniswap protocol is a peer-to-peer1 system designed for exchanging cryptocurrencies (ERC-20 Tokens) on the Ethereum blockchain. The protocol is implemented as a set of persistent, non-upgradable smart contracts; designed to prioritize censorship resistance, security, self-custody, and to function without any trusted intermediaries who may selectively restrict access.",
+};
