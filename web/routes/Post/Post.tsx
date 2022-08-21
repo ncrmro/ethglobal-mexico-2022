@@ -4,29 +4,35 @@ import { PostApiRes } from "./fetchPost";
 import MakeBoardroomLink from "../../components/makeBoardroomLink";
 import { queryProposalState, updatePost } from "./update-proposal-status";
 import { useViewer } from "../../context/Viewer";
+import Link from "next/link";
 
-const Comments: React.FC<{ comments: PostApiRes["comments"] }> = (props) => (
-  <div className={styles.comments}>
-    {props.comments.map((comment) => (
-      <div key={comment.id}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            paddingBottom: "0.25em",
-          }}
-        >
-          <MakeBoardroomLink {...comment.author} />
-          <div>{comment.author.daos["testDAO"].tokenCount}T</div>
+const Comments: React.FC<{ comments: PostApiRes["comments"] }> = (props) => {
+  const viewer = useViewer();
+  return (
+    <div className={styles.comments}>
+      {props.comments.map((comment) => (
+        <div key={comment.id}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              paddingBottom: "0.25em",
+            }}
+          >
+            <Link href={`/users/${viewer?.address}`}>
+              {comment.author.username}
+            </Link>
+            <div>{comment.author.daos["testDAO"].tokenCount}T</div>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div>{comment.message}</div>
+            <div>{comment.author.daos["testDAO"].votingPower}P</div>
+          </div>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>{comment.message}</div>
-          <div>{comment.author.daos["testDAO"].votingPower}P</div>
-        </div>
-      </div>
-    ))}
-  </div>
-);
+      ))}
+    </div>
+  );
+};
 
 export const Post = ({ post }: { post: PostApiRes }) => {
   const viewer = useViewer();
@@ -65,6 +71,9 @@ export const Post = ({ post }: { post: PostApiRes }) => {
         </button>
 
         <MakeBoardroomLink {...post.author} />
+          {/*<Link href={`/users/${post?.author.address}`}>*/}
+          {/*    {post.author.username}*/}
+          {/*</Link>*/}
         <div>State: {post.state}</div>
       </div>
       <div style={{ display: "flex" }}>

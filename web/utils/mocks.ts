@@ -77,6 +77,10 @@ export interface Post {
   title: string;
   state: ProposalState;
   comments: CommentType[];
+  // comments: {
+  //   preDraft: CommentType[];
+  //   postDraft: CommentType[];
+  // };
 }
 
 export interface DAO {
