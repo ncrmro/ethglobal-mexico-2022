@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Proposal.module.css";
-import fetchProposal, { ProposalApiRes } from "./fetchProposals";
+import fetchProposal, { ProposalApiRes } from "./fetchProposal";
 
 const Comments: React.FC<{ comments: ProposalApiRes["comments"] }> = (
   props
