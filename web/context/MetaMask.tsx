@@ -196,6 +196,7 @@ export const MetaMask = () => {
         </button>
       ) : (
         <p style={{ whiteSpace: "nowrap" }}>
+          {console.log(viewer)}
           {viewer?.username ? viewer.username : viewer?.address}
         </p>
       )}
