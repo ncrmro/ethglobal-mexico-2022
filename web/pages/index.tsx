@@ -1,1 +1,1 @@
-export { ProposalsRoute as default } from "../routes/Proposals";
+export { PostsRoute as default } from "../routes/Posts";
