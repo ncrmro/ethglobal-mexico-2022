@@ -1,4 +1,4 @@
-import { post, Proposal as ProposalType } from "../../utils/mocks";
+import { posts, Proposal as ProposalType } from "../../utils/mocks";
 import { PostApiRes } from "../Post/fetchPost";
 
 export interface PostsApiRes extends Omit<ProposalType, "authorAddress"> {
@@ -6,5 +6,5 @@ export interface PostsApiRes extends Omit<ProposalType, "authorAddress"> {
 }
 
 export default function fetchPosts() {
-  return { posts: [post] };
+  return { posts };
 }
