@@ -7,7 +7,6 @@ import { useViewer } from "../../context/Viewer";
 import Link from "next/link";
 
 const Comments: React.FC<{ comments: PostApiRes["comments"] }> = (props) => {
-  const viewer = useViewer();
   return (
     <div className={styles.comments}>
       {props.comments.map((comment) => (
@@ -19,7 +18,7 @@ const Comments: React.FC<{ comments: PostApiRes["comments"] }> = (props) => {
               paddingBottom: "0.25em",
             }}
           >
-            <MakeBoardroomLink {...viewer!} />
+            <MakeBoardroomLink {...comment.author!} />
             {/*<Link href={`/users/${viewer?.address}`}>*/}
             {/*  {comment.author.username}*/}
             {/*</Link>*/}
@@ -35,8 +34,9 @@ const Comments: React.FC<{ comments: PostApiRes["comments"] }> = (props) => {
   );
 };
 
-export const Post = ({ post }: { post: PostApiRes }) => {
+export const Post = (props: { post: PostApiRes }) => {
   const viewer = useViewer();
+  const [post] = useState(props.post);
   const [proposalId, setProposalId] = useState("");
 
   return (
@@ -46,6 +46,8 @@ export const Post = ({ post }: { post: PostApiRes }) => {
         {post.proposal.id ? (
           <div>
             <a
+              target="_blank"
+              rel="noreferrer"
               href={`https://app.uniswap.org/#/vote/2/${post.proposal.id}?chain=mainnet`}
             >
               Proposal Link
