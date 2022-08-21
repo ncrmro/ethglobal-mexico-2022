@@ -33,8 +33,8 @@ export const accounts: User[] = [
     },
   },
   {
-    address: "0x25A5629AF61C24B832C9C82C4f443862380063b7",
-    username: "devin_mathew",
+    address: "0x77EC061aC11df6b42Af3784BCE835A5feAF247Dd",
+    username: "deven_mathew",
     daos: {
       testDAO,
     },
