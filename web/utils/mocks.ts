@@ -145,3 +145,14 @@ export const proposal: Proposal = {
   status: "ACTIVE",
   postID: "1",
 };
+
+export const proposals: Proposal[] = [
+  proposal,
+  {
+    ...proposal,
+    id: "2",
+    contractAddress: "0x0000000000000000",
+    status: "EXPIRED",
+    postID: "2",
+  },
+];
