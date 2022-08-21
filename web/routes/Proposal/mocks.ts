@@ -38,14 +38,14 @@ interface Comment {
   votingPower: number;
 }
 
-interface Proposal {
+interface Post {
   id: string;
   title: string;
   state: ProposalState;
   comments: Comment[];
 }
 
-export const proposal: Proposal = {
+export const proposal: Post = {
   id: "1",
   title: "Should the next ETH Global be hosted in South Dakota",
   state: "Drafted" as ProposalState,
@@ -67,7 +67,7 @@ export const proposal: Proposal = {
   ],
 };
 
-export const proposals: Proposal[] = [
+export const proposals: Post[] = [
   proposal,
   {
     ...proposal,
