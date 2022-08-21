@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styles from "./Post.module.css";
 import { PostApiRes } from "./fetchPost";
 import MakeBoardroomLink from "../../components/makeBoardroomLink";
-import { queryProposalState } from "./update-proposal-status";
+import { queryProposalState, updatePost } from "./update-proposal-status";
+import { useViewer } from "../../context/Viewer";
 
 const Comments: React.FC<{ comments: PostApiRes["comments"] }> = (props) => (
   <div className={styles.comments}>
@@ -28,7 +29,8 @@ const Comments: React.FC<{ comments: PostApiRes["comments"] }> = (props) => (
 );
 
 export const Post = ({ post }: { post: PostApiRes }) => {
-  const [text, setText] = useState("");
+  const viewer = useViewer();
+  const [proposalId, setProposalId] = useState("");
 
   return (
     <div className={styles.container}>
@@ -44,12 +46,19 @@ export const Post = ({ post }: { post: PostApiRes }) => {
         <input
           type="number"
           placeholder="Add Proposal ID"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
+          value={proposalId}
+          onChange={(e) => setProposalId(e.target.value)}
         />
         <button
           onClick={async () => {
-            const state = queryProposalState(text);
+            const state = await queryProposalState(proposalId);
+            const { ...p } = post;
+            await updatePost({
+              ...p,
+              authorAddress: viewer?.address!,
+              proposalId,
+              state,
+            });
           }}
         >
           Submit
