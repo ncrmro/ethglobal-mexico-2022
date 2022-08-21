@@ -76,6 +76,7 @@ export interface DAO {
 
 export interface Proposal {
   id: string;
+  doaId: string;
   authorAddress: string;
   contractAddress: string;
   title: string;
@@ -139,7 +140,8 @@ export const daos: DAO[] = [
 
 export const proposal: Proposal = {
   id: "1",
-  title: "Cool thing",
+  title: "Should the next ETH Global be hosted in South Dakota",
+  doaId: dao.id,
   authorAddress: accounts[1].address,
   contractAddress: "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
   status: "ACTIVE",
@@ -150,6 +152,7 @@ export const proposals: Proposal[] = [
   proposal,
   {
     ...proposal,
+    title: "Should the next ETH Global be hosted in Australia",
     id: "2",
     contractAddress: "0x0000000000000000",
     status: "EXPIRED",
