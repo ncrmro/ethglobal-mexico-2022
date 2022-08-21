@@ -5,6 +5,7 @@ import MakeBoardroomLink from "../../components/makeBoardroomLink";
 import { queryProposalState, updatePost } from "./update-proposal-status";
 import { useViewer } from "../../context/Viewer";
 import Link from "next/link";
+import AddComment from "../../components/AddComment";
 
 const Comments: React.FC<{ comments: PostApiRes["comments"] }> = (props) => {
   return (
@@ -97,6 +98,7 @@ export const Post = (props: { post: PostApiRes }) => {
         <hr />
       </div>
       <Comments comments={post.comments} />
+      <AddComment></AddComment>
     </div>
   );
 };
