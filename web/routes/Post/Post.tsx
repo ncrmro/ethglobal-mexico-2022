@@ -71,9 +71,9 @@ export const Post = ({ post }: { post: PostApiRes }) => {
         </button>
 
         <MakeBoardroomLink {...post.author} />
-          {/*<Link href={`/users/${post?.author.address}`}>*/}
-          {/*    {post.author.username}*/}
-          {/*</Link>*/}
+        {/*<Link href={`/users/${post?.author.address}`}>*/}
+        {/*    {post.author.username}*/}
+        {/*</Link>*/}
         <div>State: {post.state}</div>
       </div>
       <div style={{ display: "flex" }}>
