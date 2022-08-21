@@ -41,7 +41,7 @@ export const Post = ({ post }: { post: PostApiRes }) => {
           // @ts-ignore
           onSubmit={(e) => setText(e.target.value)}
         />
-        <input type="button" onClick={() => queryProposalState(text)} />
+        <button onClick={() => queryProposalState(text)}>Submit</button>
 
         <MakeBoardroomLink {...post.author} />
         <div>State: {post.state}</div>
