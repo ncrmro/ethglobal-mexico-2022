@@ -1,10 +1,15 @@
-const { createClient } = require("redis");
+// enum ProposalState {
+//   Pending,
+//   Active,
+//   Canceled,
+//   Defeated,
+//   Succeeded,
+//   Queued,
+//   Expired,
+//   Executed
+// }
 
-const redisClient = createClient({
-  url: "rediss://default:AVNS_2Nk0wcxrgMtvKp1cm1z@db-redis-nyc3-59824-do-user-1570434-0.b.db.ondigitalocean.com:25061",
-});
-
-const accounts = [
+export const accounts = [
   {
     address: "0x4269f41Fa8440CdbD1A919eEd9414bF96BDFB5eE",
     username: "juanforthemoney",
@@ -19,10 +24,47 @@ const accounts = [
   },
 ];
 
-const post = {
+export const mockUsers = {
+  address1: {
+    username: "Dr Who",
+  },
+  address2: {
+    username: "Batman",
+  },
+  address3: {
+    username: "Iron Man",
+  },
+};
+
+export const proposalState = [
+  "Draft",
+  "Published",
+  "Passed",
+  "Failed",
+] as const;
+
+export type ProposalState = typeof proposalState[number];
+
+interface Comment {
+  id: string;
+  authorAddress: string;
+  message: string;
+  sentiment: "agree" | "disagree" | "numeral";
+  votingPower: number;
+}
+
+interface Post {
+  id: string;
+  authorAddress: string;
+  title: string;
+  state: ProposalState;
+  comments: Comment[];
+}
+
+export const post: Post = {
   id: "1",
   title: "Should the next ETH Global be hosted in South Dakota",
-  state: "Drafted",
+  state: "Draft",
   authorAddress: accounts[0].address,
   comments: [
     {
@@ -42,27 +84,12 @@ const post = {
   ],
 };
 
-const posts = [
+export const posts: Post[] = [
   post,
   {
     ...post,
     id: "2",
-    authorAddress: accounts[0].address,
     title: "Should the next ETH Global be hosted in Australia",
     state: "Published",
   },
 ];
-
-redisClient.connect().then(async () => {
-  await redisClient.flushDb();
-  for (const i of accounts) {
-    await redisClient.set(`user:${i.address}`, JSON.stringify(i));
-  }
-  for (const i of posts) {
-    await redisClient.set(
-      `post:fake-hash-${new Date().getMilliseconds()}`,
-      JSON.stringify(i)
-    );
-  }
-  await redisClient.quit();
-});
