@@ -4,6 +4,7 @@ import { Web3Provider } from "@ethersproject/providers";
 // Todo: import Contract
 import { toast } from "react-toastify";
 import { ethers } from "ethers";
+import ReactTooltip from "react-tooltip";
 
 declare let window: any;
 
@@ -78,19 +79,7 @@ export const MetaMask = () => {
           Connect Wallet
         </button>
       ) : (
-        <button
-          onClick={() =>
-            toast.info(`Your wallet address is: ${account}`, {
-              autoClose: 3000,
-              position: "top-center",
-              style: {
-                width: 120,
-              },
-            })
-          }
-        >
-          Wallet Connected
-        </button>
+        <button>Wallet is connected</button>
       )}
     </div>
   );
