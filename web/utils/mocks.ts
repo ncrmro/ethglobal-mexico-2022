@@ -118,6 +118,18 @@ export const dao: DAO = {
     "The Uniswap protocol is a peer-to-peer1 system designed for exchanging cryptocurrencies (ERC-20 Tokens) on the Ethereum blockchain. The protocol is implemented as a set of persistent, non-upgradable smart contracts; designed to prioritize censorship resistance, security, self-custody, and to function without any trusted intermediaries who may selectively restrict access.",
 };
 
+export const daos: DAO[] = [
+  dao,
+  {
+    ...dao,
+    id: "DAO",
+    title: "DUMBDAO",
+    contractAddress: "0x0000000000",
+    tokenAddress: "0x000000000",
+    description: "Some dummmy info about a dao that is super cool",
+  },
+];
+
 export const proposal: Proposal = {
   id: "1",
   contractAddress: "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",

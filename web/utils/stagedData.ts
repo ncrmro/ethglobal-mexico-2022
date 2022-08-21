@@ -1,5 +1,5 @@
 import { getRedisClient } from "./redis";
-import { accounts, posts } from "./mocks";
+import { accounts, posts, daos } from "./mocks";
 
 export const fakeExport = {};
 
@@ -13,6 +13,9 @@ getRedisClient().then(async (redisClient) => {
       `post:fake-hash-${new Date().getMilliseconds()}`,
       JSON.stringify(i)
     );
+  }
+  for (const i of daos) {
+    await redisClient.set(`dao:${i.contractAddress}`, JSON.stringify(i));
   }
   await redisClient.quit();
 });
