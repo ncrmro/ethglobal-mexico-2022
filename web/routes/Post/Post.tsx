@@ -36,17 +36,24 @@ export const Post = ({ post }: { post: PostApiRes }) => {
         <div>{post.title}</div>
         <div>
           <a
-            href={`https://app.uniswap.org/#/vote/2/$${post.proposal.id}}?chain=mainnet`}
+            href={`https://app.uniswap.org/#/vote/2/${post.proposal.id}}?chain=mainnet`}
           >
             Proposal Link
           </a>
         </div>
         <input
+          type="number"
           placeholder="Add Proposal ID"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <button onClick={() => queryProposalState(text)}>Submit</button>
+        <button
+          onClick={async () => {
+            const state = queryProposalState(text);
+          }}
+        >
+          Submit
+        </button>
 
         <MakeBoardroomLink {...post.author} />
         <div>State: {post.state}</div>
