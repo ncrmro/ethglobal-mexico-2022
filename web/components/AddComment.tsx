@@ -8,7 +8,14 @@ const AddComment = () => {
   const [isVisible, setVisibility] = useState(false);
   const viewer = useViewer();
   return (
-    <div style={{ paddingBlockStart: "4rem" }}>
+    <div
+      style={{
+        paddingBlockStart: "4rem",
+        display: "flex",
+        justifyContent: "center",
+        alignContent: "center",
+      }}
+    >
       {isVisible && (
         <form
           id="create-post"
@@ -35,10 +42,12 @@ const AddComment = () => {
         </form>
       )}
       <button
-        style={{ marginBlockStart: "2rem" }}
+        style={{
+          marginBlockStart: "2rem",
+        }}
         onClick={() => setVisibility(!isVisible)}
       >
-        SUBMIT a comment
+        Add Comment
       </button>
     </div>
   );
