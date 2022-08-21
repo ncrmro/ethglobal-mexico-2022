@@ -1,3 +1,1 @@
-import { Users } from "../../routes/Users";
-
-export default Users;
+export { UserRoute as default } from "../../routes/User";
