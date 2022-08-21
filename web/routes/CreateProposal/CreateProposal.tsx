@@ -6,11 +6,11 @@ export const CreateProposalForm = () => {
   const viewer = useViewer();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
-  if (!viewer?.account) {
+  console.log("VIEWER@@@", viewer?.address);
+  if (!viewer?.address) {
     return (
       <div>
-        Please connect you're wallet before attempting to create a new post
+        Please connect your wallet before attempting to create a new post
       </div>
     );
   }
@@ -36,7 +36,7 @@ export const CreateProposalForm = () => {
         onSubmit={async (e) => {
           e.preventDefault();
           await createProposalAPI({
-            userAddress: viewer.account,
+            userAddress: viewer.address,
             title,
             content,
           });

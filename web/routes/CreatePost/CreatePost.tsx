@@ -7,10 +7,10 @@ export const CreatePostForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  if (!viewer?.account) {
+  if (!viewer?.address) {
     return (
       <div>
-        Please connect you're wallet before attempting to create a new post
+        Please connect your wallet before attempting to create a new post
       </div>
     );
   }
@@ -35,7 +35,7 @@ export const CreatePostForm = () => {
         }}
         onSubmit={async (e) => {
           e.preventDefault();
-          await createPostAPI({ userAddress: viewer.account, title, content });
+          await createPostAPI({ userAddress: viewer.address, title, content });
         }}
       >
         <label htmlFor="title">Title</label>
