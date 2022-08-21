@@ -32,7 +32,7 @@ export const Post = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <div>{post.title}</div>
-        <div>{post.proposal.title}</div>
+        <div>{post.proposalId}</div>
         <MakeBoardroomLink {...post.author} />
         <div>State: {post.state}</div>
       </div>
